@@ -20,14 +20,14 @@ class Counter extends Component {
             listStyleType: 'none'
         }
 
-        /* const listItems = this.props.storedVal.map((index,number) =>
-            
-            <li key={number}>{number}</li>  
-        ); */
+        console.log('storeVal Counter', this.props.storedVal);
+        
 
         let listItems = (
             <ul style={style}>
                 {this.props.storedVal.map((value, index) => {
+                     console.log('value', value)
+                        console.log('index', index)
                     return <li key={index} onClick={() => this.props.deleteValue(index)}>{value}</li>
                 })}
             </ul>
@@ -45,10 +45,11 @@ class Counter extends Component {
 
                 <Controller text={"Increment 5"} click={this.props.incFiveHandler} />
 
-                <Controller text={"Increment 5"} click={this.props.decFiveHandler} />
+                <Controller text={"Decrement 5"} click={this.props.decFiveHandler} />
 
                 <hr className="solid"></hr>
-                <Controller text={"Store"} click={() => { this.props.storeValue(this.props.newCounter) }} />
+                {/* <Controller text={"Store"} click={() => { this.props.storeValue(this.props.newCounter) }} />  storing value by giving input value as latest calculated (inc, dec) value*/}
+                <Controller text={"Store"} click={this.props.storeValue} />
                 {listItems}
 
             </div>);
@@ -72,8 +73,9 @@ const mapDispatchToProps = (dispatch, props) => {
         decChangedHandler: () => dispatch({ type: 'DecrementOne' }),
         incFiveHandler: () => dispatch({ type: 'IncrementFive', value: 5 }),
         decFiveHandler: () => dispatch({ type: 'DecrementFive', value: 5 }),
-        storeValue: (val) => dispatch({ type: 'storeVal', value: val }),
-        deleteValue: (index) => dispatch({type:'deleteVal',value:index})
+        //storeValue: (val) => dispatch({ type: 'storeVal', value: val }),
+        storeValue: () => dispatch({ type: 'storeVal' }),
+        deleteValue: (index) => dispatch({ type: 'deleteVal', value: index })
     }
 }
 
